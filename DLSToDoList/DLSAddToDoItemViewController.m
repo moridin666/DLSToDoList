@@ -33,10 +33,11 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-
-    if (sender == self.cancelButton) return;
-    
-    else if (sender == self.textField)
+    if (sender == self.cancelButton)
+    {
+        return;
+    }
+    if ((sender == self.textField.delegate) || (sender == self.doneButton))
     {
         if (self.textField.text.length > 0)
         {
@@ -53,8 +54,8 @@
             }
         }
     }
-    else return;
 }
+
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
