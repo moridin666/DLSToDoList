@@ -38,6 +38,8 @@
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue
 {
 
+    
+    
 }
 
 
@@ -113,9 +115,12 @@
     {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    
+    // Set text according to toDoItem name
     [cell.textLabel setText:[NSString stringWithFormat:@"%@", [toDoItem valueForKey:@"itemName"]]];
+    // Customize font, text color, and size
     cell.textLabel.textColor = [UIColor whiteColor];
+    UIFont *cellFont = [UIFont fontWithName:@"Helvetica" size: 12.0];
+    cell.textLabel.font = cellFont;
     return cell;
 }
 
