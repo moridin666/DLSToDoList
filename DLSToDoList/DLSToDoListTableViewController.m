@@ -54,6 +54,7 @@
 {
     [super viewDidLoad];
     self.toDoItems = [[NSMutableArray alloc] init];
+    self.view.backgroundColor = [UIColor blackColor];
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -114,6 +115,7 @@
     }
     
     [cell.textLabel setText:[NSString stringWithFormat:@"%@", [toDoItem valueForKey:@"itemName"]]];
+    cell.textLabel.textColor = [UIColor whiteColor];
     return cell;
 }
 

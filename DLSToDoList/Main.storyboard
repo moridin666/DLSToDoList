@@ -20,7 +20,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.92941182851791382" green="0.9803922176361084" blue="0.94117653369903564" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.33907948369565222" green="0.0" blue="0.052161084368213421" alpha="1" colorSpace="calibratedRGB"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -71,11 +71,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Add a new To-Do Item" id="5sm-ZO-fAr">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="yOf-Oh-uRu">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="deviceRGB"/>
                             <connections>
                                 <segue destination="ecK-fn-5Hw" kind="unwind" unwindAction="unwindToList:" id="vS7-BP-Cr2"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="4aa-1U-4kl">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="deviceRGB"/>
                             <connections>
                                 <segue destination="ecK-fn-5Hw" kind="unwind" unwindAction="unwindToList:" id="oBq-tQ-s5f"/>
                             </connections>
