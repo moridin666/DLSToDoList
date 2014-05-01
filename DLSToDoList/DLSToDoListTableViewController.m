@@ -37,15 +37,7 @@
 
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue
 {
-    
-    NSManagedObjectContext *context = [self managedObjectContext];
-    
-    DLSAddToDoItemViewController *source = [segue sourceViewController];
-    DLSToDoItem *item = source.toDoItem;
-    if (item != nil) {
-        [self.toDoItems addObject:item];
-        self.toDoItems = [NSEntityDescription insertNewObjectForEntityForName:@"DLSToDoItem" inManagedObjectContext:context];
-    }
+
 }
 
 

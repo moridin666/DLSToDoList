@@ -10,6 +10,7 @@
 
 @interface DLSAddToDoItemViewController ()
 
+
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
@@ -32,23 +33,25 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+
     if (sender == self.cancelButton) return;
-    else if (self.textField.text.length > 0)
+    
+    else if (sender == self.textField)
     {
-        NSManagedObjectContext *context = [self managedObjectContext];
-        
-        //Create a new Managed Object
-        NSManagedObject *toDoItem = [NSEntityDescription insertNewObjectForEntityForName:@"DLSToDoItem" inManagedObjectContext:context];
-        [toDoItem setValue:self.textField.text forKey:@"itemName"];
-        self.toDoItem.completed = NO;
-        
-        NSError *error = nil;
-        if (![context save:&error])
+        if (self.textField.text.length > 0)
         {
-            NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+            NSManagedObjectContext *context = [self managedObjectContext];
+            //Create a new Managed Object
+            NSManagedObject *toDoItem = [NSEntityDescription insertNewObjectForEntityForName:@"DLSToDoItem" inManagedObjectContext:context];
+            [toDoItem setValue:self.textField.text forKey:@"itemName"];
+            self.toDoItem.completed = NO;
+            
+            NSError *error = nil;
+            if (![context save:&error])
+            {
+                NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+            }
         }
-        
-        [self dismissViewControllerAnimated:YES completion:nil];
     }
     else return;
 }
@@ -73,7 +76,6 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [self performSegueWithIdentifier:@"keyboardReturn" sender:self];
-    [textField resignFirstResponder];
     return YES;
 }
 

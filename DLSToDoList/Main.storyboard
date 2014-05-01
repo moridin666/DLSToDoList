@@ -64,16 +64,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="aAk-aP-aEt" firstAttribute="top" secondItem="Dsq-uC-S1G" secondAttribute="bottom" constant="47" id="0Nf-eM-Sle"/>
-                            <constraint firstAttribute="trailing" secondItem="aAk-aP-aEt" secondAttribute="trailing" constant="36" id="OfT-iQ-QOT"/>
-                            <constraint firstItem="aAk-aP-aEt" firstAttribute="centerX" secondItem="ccD-Ef-8vD" secondAttribute="centerX" id="VgI-Fs-gLN"/>
-                            <constraint firstItem="aAk-aP-aEt" firstAttribute="leading" secondItem="ccD-Ef-8vD" secondAttribute="leading" constant="37" id="pu5-IT-D4a"/>
+                            <constraint firstAttribute="trailing" secondItem="aAk-aP-aEt" secondAttribute="trailing" constant="36" id="Igu-8g-vNY"/>
+                            <constraint firstItem="aAk-aP-aEt" firstAttribute="top" secondItem="Dsq-uC-S1G" secondAttribute="bottom" constant="47" id="Zv0-Ik-P0d"/>
+                            <constraint firstItem="aAk-aP-aEt" firstAttribute="leading" secondItem="ccD-Ef-8vD" secondAttribute="leading" constant="37" id="lx3-XK-dvc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add a new To-Do Item" id="5sm-ZO-fAr">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="yOf-Oh-uRu">
                             <connections>
-                                <segue destination="ecK-fn-5Hw" kind="unwind" unwindAction="unwindToList:" id="laQ-o8-20f"/>
+                                <segue destination="ecK-fn-5Hw" kind="unwind" unwindAction="unwindToList:" id="vS7-BP-Cr2"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="4aa-1U-4kl">
@@ -83,7 +82,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="cancelButton" destination="yOf-Oh-uRu" id="u4M-a1-ZuE"/>
+                        <outlet property="cancelButton" destination="yOf-Oh-uRu" id="XFY-1b-hON"/>
                         <outlet property="doneButton" destination="4aa-1U-4kl" id="9as-O0-qS0"/>
                         <outlet property="textField" destination="aAk-aP-aEt" id="ZTB-v5-zaf"/>
                     </connections>
