@@ -50,6 +50,13 @@
     
 }
 
+- (void)scrollToBottom
+{
+    CGPoint bottomOffset = CGPointMake(0, self.tableView.contentSize.height - self.tableView.bounds.size.height);
+    if ( bottomOffset.y > 0 ) {
+        [self.tableView setContentOffset:bottomOffset animated:YES];
+    }
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -84,6 +91,7 @@
     
     //reload the table
     [self.tableView reloadData];
+    [self scrollToBottom];
 }
 
 - (void)didReceiveMemoryWarning
