@@ -14,12 +14,11 @@
 
 @property (strong) NSArray *fetchResults;
 @property (strong) NSManagedObject *helper;
-
-
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue;
 
-
 @end
+
+
 
 @implementation DLSToDoListTableViewController
 
@@ -65,8 +64,7 @@
     [fetchRequest setSortDescriptors:@[displayOrder]];
     self.toDoItems = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
-    
-    //reload the table
+    //reload the table, and scroll to the bottom
     [self.tableView reloadData];
     [self scrollToBottom];
 }
