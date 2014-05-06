@@ -7,6 +7,7 @@
 //
 
 #import "DLSAddToDoItemViewController.h"
+#import "DLSToDoListTableViewController.h"
 
 @interface DLSAddToDoItemViewController ()
 
@@ -43,9 +44,10 @@
         {
             NSManagedObjectContext *context = [self managedObjectContext];
             //Create and save a new Managed Object
-            
+            DLSToDoListTableViewController *destination = [segue destinationViewController];
             NSManagedObject *toDoItem = [NSEntityDescription insertNewObjectForEntityForName:@"DLSToDoItem" inManagedObjectContext:context];
             [toDoItem setValue:self.textField.text forKey:@"itemName"];
+            [toDoItem setValue:[NSNumber numberWithInt:[destination.toDoItems count]] forKey:@"displayOrder"];
             self.toDoItem.completed = NO;
             
             NSError *error = nil;

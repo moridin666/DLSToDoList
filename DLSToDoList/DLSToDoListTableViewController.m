@@ -12,7 +12,6 @@
 
 @interface DLSToDoListTableViewController ()
 
-@property (strong) NSMutableArray *toDoItems;
 @property (strong) NSArray *fetchResults;
 @property (strong) NSManagedObject *helper;
 
@@ -150,13 +149,13 @@
     if (completed) {
         [tappedItem setValue:[NSNumber numberWithBool:NO] forKey:@"completed"];
         [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-        [self saveCompletionStatus:tappedItem];
+        [self saveStatus:tappedItem];
     }
     else
     {
         [tappedItem setValue:[NSNumber numberWithBool:YES] forKey:@"completed"];
         [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-        [self saveCompletionStatus:tappedItem];
+        [self saveStatus:tappedItem];
     }
 }
 
@@ -335,7 +334,7 @@
     return index;
 }
 
-- (void)saveCompletionStatus:(NSManagedObject *)tappedItem
+- (void)saveStatus:(NSManagedObject *)toDoItem
 {
     NSManagedObjectContext *context = [self managedObjectContext];
     

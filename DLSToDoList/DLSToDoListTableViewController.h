@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DLSToDoItem.h"
 
 @interface DLSToDoListTableViewController : UITableViewController
+
+@property DLSToDoItem *toDoItem;
+@property (strong) NSMutableArray *toDoItems;
 
 @end
