@@ -44,14 +44,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // allocate and initialize the tableView's data source
     self.toDoItems = [[NSMutableArray alloc] init];
+    
+    // set UI Background color and make the edit button available
     self.view.backgroundColor = [UIColor blackColor];
-    
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 }
 
@@ -192,28 +190,6 @@
     NSInteger destinationIndex = destinationIndexPath.row;
     NSValue *rowNumber = [self convertNSIntegerToNSValue:&destinationIndex];
     [toDoToMove setValue:rowNumber forKey:@"displayOrder"];
-    [self.tableView reloadData];
-    
-    // Save new row indices for all displaced objects in the data model
-    
-/*    [self savePosition:toDoToMove withDisplayOrderKey:rowNumber];
-    
-    if (destinationIndex > sourceIndex) {
-        for (int i = sourceIndex; i < destinationIndex; i++) {
-            NSManagedObject *bubbleUp = [self.toDoItems objectAtIndex:i];
-            NSValue *rowNumber = [self convertNSIntegerToNSValue:&i];
-            [self savePosition:bubbleUp withDisplayOrderKey:rowNumber];
-            
-        }
-    }
-    if (destinationIndex < sourceIndex) {
-        for (int i = destinationIndex - 1; i > sourceIndex; i--) {
-            NSManagedObject *bubbleDown = [self.toDoItems objectAtIndex:i];
-            NSValue *rowNumber = [self convertNSIntegerToNSValue:&i];
-            [self savePosition:bubbleDown withDisplayOrderKey:rowNumber];
-        }
-    }
-    */
     [self.tableView reloadData];
     
 }
