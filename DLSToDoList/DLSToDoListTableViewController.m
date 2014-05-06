@@ -320,17 +320,5 @@
     
 }
 
-- (void)savePosition:(NSManagedObject *)toDoToMove withDisplayOrderKey:(NSValue *)index
-{
-    NSManagedObjectContext *context = [self managedObjectContext];
-    [toDoToMove setValue:index forKey:@"displayOrder"];
-    
-    NSError *error = nil;
-    if (![context save:&error])
-    {
-        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-    }
-    
-}
 
 @end
