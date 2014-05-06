@@ -150,11 +150,13 @@
     if (completed) {
         [tappedItem setValue:[NSNumber numberWithBool:NO] forKey:@"completed"];
         [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [self saveCompletionStatus:tappedItem];
     }
     else
     {
         [tappedItem setValue:[NSNumber numberWithBool:YES] forKey:@"completed"];
         [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [self saveCompletionStatus:tappedItem];
     }
 }
 
@@ -187,14 +189,15 @@
     [self.toDoItems removeObjectAtIndex:sourceIndexPath.row];
     [self.toDoItems insertObject:toDoToMove atIndex:destinationIndexPath.row];
     
-    NSInteger sourceIndex = sourceIndexPath.row;
+//    NSInteger sourceIndex = sourceIndexPath.row;
     NSInteger destinationIndex = destinationIndexPath.row;
     NSValue *rowNumber = [self convertNSIntegerToNSValue:&destinationIndex];
+    [toDoToMove setValue:rowNumber forKey:@"displayOrder"];
     [self.tableView reloadData];
     
     // Save new row indices for all displaced objects in the data model
     
-    [self savePosition:toDoToMove withDisplayOrderKey:rowNumber];
+/*    [self savePosition:toDoToMove withDisplayOrderKey:rowNumber];
     
     if (destinationIndex > sourceIndex) {
         for (int i = sourceIndex; i < destinationIndex; i++) {
@@ -211,7 +214,7 @@
             [self savePosition:bubbleDown withDisplayOrderKey:rowNumber];
         }
     }
-    
+    */
     [self.tableView reloadData];
     
 }
@@ -330,6 +333,18 @@
 {
     NSValue *index = [NSNumber numberWithInt:*input];
     return index;
+}
+
+- (void)saveCompletionStatus:(NSManagedObject *)tappedItem
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    NSError *error = nil;
+    if (![context save:&error])
+    {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+    }
+    
 }
 
 - (void)savePosition:(NSManagedObject *)toDoToMove withDisplayOrderKey:(NSValue *)index
