@@ -64,6 +64,7 @@
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSSortDescriptor *displayOrder = [[NSSortDescriptor alloc] initWithKey:@"displayOrder" ascending:YES];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"DLSToDoItem"];
+    [fetchRequest shouldRefreshRefetchedObjects];
     [fetchRequest setSortDescriptors:@[displayOrder]];
     self.toDoItems = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
@@ -81,36 +82,6 @@
     }
 }
 
-/*
- //
- ///
- ////
- /////
- ///// Segues
- ////
- ///
- //
-*/
-
-
-
-- (IBAction)unwindToList:(UIStoryboardSegue *)segue
-{
-    
-    NSManagedObjectContext *context = [self managedObjectContext];
-    
-    DLSAddToDoItemViewController *source = [segue sourceViewController];
-    DLSToDoItem *item = source.toDoItem;
-    NSNumber *displayOrder = [NSNumber numberWithInt:[self.toDoItems count]];
-    
-    // Save the object's position in the array
-    if (item != nil) {
-        [self.toDoItems addObject:item];
-        self.toDoItems = [NSEntityDescription insertNewObjectForEntityForName:@"DLSToDoItem" inManagedObjectContext:context];
-        // Set the displayOrder value
-        [item setValue:displayOrder forKey:@"displayOrder"];
-    }
-}
 
 
 /*
@@ -209,7 +180,7 @@
     return YES;
 }
 
-// Override to support rearranging the table view.
+// Allow rows to be re-ordered
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     NSManagedObject *toDoToMove = [self.toDoItems objectAtIndex:sourceIndexPath.row];
@@ -221,12 +192,12 @@
     NSValue *rowNumber = [self convertNSIntegerToNSValue:&destinationIndex];
     [self.tableView reloadData];
     
-    // Save new row indices for all displaced objects
+    // Save new row indices for all displaced objects in the data model
     
     [self savePosition:toDoToMove withDisplayOrderKey:rowNumber];
     
     if (destinationIndex > sourceIndex) {
-        for (int i = sourceIndex + 1; i < destinationIndex; i++) {
+        for (int i = sourceIndex; i < destinationIndex; i++) {
             NSManagedObject *bubbleUp = [self.toDoItems objectAtIndex:i];
             NSValue *rowNumber = [self convertNSIntegerToNSValue:&i];
             [self savePosition:bubbleUp withDisplayOrderKey:rowNumber];
@@ -300,6 +271,39 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+/*
+ //
+ ///
+ ////
+ /////
+ ///// Segues
+ ////
+ ///
+ //
+ */
+
+
+
+- (IBAction)unwindToList:(UIStoryboardSegue *)segue
+{
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    DLSAddToDoItemViewController *source = [segue sourceViewController];
+    DLSToDoItem *item = source.toDoItem;
+    NSNumber *displayOrder = [NSNumber numberWithInt:[self.toDoItems count] - 1];
+    
+    // Save the object's position in the array
+    if (item != nil) {
+        // Set the displayOrder value
+        item.displayOrder = displayOrder;
+        [self.toDoItems addObject:item];
+        self.toDoItems = [NSEntityDescription insertNewObjectForEntityForName:@"DLSToDoItem" inManagedObjectContext:context];
+        
+    }
+}
+
+
 /*
  ///
  ////
@@ -320,41 +324,6 @@
         context = [delegate managedObjectContext];
     }
     return context;
-}
-
-- (NSMutableArray *)getRowObjects
-{
-    NSManagedObjectContext *context = [self managedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    //Configure the request's entity, and optionally its predicate (via Apple)
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"RowObj" inManagedObjectContext:[self managedObjectContext]];
-    [fetchRequest setEntity:entity];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"displayOrder" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-
-    NSFetchedResultsController *fetchedListController = [[NSFetchedResultsController alloc]
-                                                         initWithFetchRequest:fetchRequest
-                                                         managedObjectContext:context
-                                                         sectionNameKeyPath:nil
-                                                         cacheName:nil];
-
-
-    self.fetchResults = [fetchedListController fetchedObjects];
-    if (self.fetchResults == nil) {
-        return nil;
-    }
-    else
-    {
-        NSMutableArray *mutableFetchResults = [self returnMutableFetchResults:self.fetchResults];
-        return mutableFetchResults;
-    }
-}
-
-- (NSMutableArray *)returnMutableFetchResults:(NSArray *)fetchResults
-{
-    return [NSMutableArray arrayWithArray:fetchResults];
 }
      
 - (NSValue *)convertNSIntegerToNSValue:(NSInteger *)input
