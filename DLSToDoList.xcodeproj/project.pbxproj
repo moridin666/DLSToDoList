@@ -126,11 +126,11 @@
 		EEABAF071910243700CCF409 /* DLSToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				EEABAF341910383600CCF409 /* Main.storyboard */,
 				EEABAF101910243700CCF409 /* DLSAppDelegate.h */,
 				EEABAF111910243700CCF409 /* DLSAppDelegate.m */,
 				EEABAF3F191041E400CCF409 /* DLSToDoItem.h */,
 				EEABAF40191041E400CCF409 /* DLSToDoItem.m */,
-				EEABAF341910383600CCF409 /* Main.storyboard */,
 				EEABAF3919103FD700CCF409 /* DLSToDoListTableViewController.h */,
 				EEABAF3A19103FD700CCF409 /* DLSToDoListTableViewController.m */,
 				EEABAF3619103F0400CCF409 /* DLSAddToDoItemViewController.h */,
@@ -474,6 +474,7 @@
 				EEABAF301910243800CCF409 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EEABAF311910243800CCF409 /* Build configuration list for PBXNativeTarget "DLSToDoListTests" */ = {
 			isa = XCConfigurationList;
@@ -482,6 +483,7 @@
 				EEABAF331910243800CCF409 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

@@ -42,7 +42,8 @@
         if (self.textField.text.length > 0)
         {
             NSManagedObjectContext *context = [self managedObjectContext];
-            //Create a new Managed Object
+            //Create and save a new Managed Object
+            
             NSManagedObject *toDoItem = [NSEntityDescription insertNewObjectForEntityForName:@"DLSToDoItem" inManagedObjectContext:context];
             [toDoItem setValue:self.textField.text forKey:@"itemName"];
             self.toDoItem.completed = NO;
@@ -52,6 +53,10 @@
             {
                 NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
             }
+        }
+        else
+        {
+            return;
         }
     }
 }
