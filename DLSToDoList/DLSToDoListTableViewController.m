@@ -177,7 +177,7 @@
     return YES;
 }
 
-// Allow rows to be re-ordered
+// Allow rows to be re-ordered, also iterates through all cells because once one has moved, all are re-indexed
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     NSManagedObject *toDoToMove = [self.toDoItems objectAtIndex:sourceIndexPath.row];
@@ -290,7 +290,7 @@
  ///
  */
 
-// grab the managed object context
+// set the managed object context
 - (NSManagedObjectContext *)managedObjectContext
 {
     NSManagedObjectContext *context = nil;

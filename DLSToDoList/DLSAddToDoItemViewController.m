@@ -21,6 +21,7 @@
 @implementation DLSAddToDoItemViewController
 
 
+// set the managed object context
 - (NSManagedObjectContext *)managedObjectContext
 {
     NSManagedObjectContext *context = nil;
@@ -81,6 +82,11 @@
     self.view.backgroundColor = [UIColor blackColor];
     [self.textField becomeFirstResponder];
     self.textField.delegate = self;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    [self.view endEditing:YES];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
